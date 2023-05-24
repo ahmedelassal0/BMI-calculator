@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:bmi_calculator/ResultBmiCalculatorScreen.dart';
 import 'package:flutter/material.dart';
 
 class BmiCalculator extends StatefulWidget {
@@ -185,6 +188,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                   weight--;
                                 });
                               },
+                                heroTag: 'weight-',
                               child: Icon(Icons.remove),
                                 mini: true,
                               ),
@@ -193,6 +197,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                   weight++;
                                 });
                               },
+                                heroTag: 'weight+',
                               child: Icon(Icons.add),
                                 mini: true,
                               ),
@@ -236,6 +241,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                   age--;
                                 });
                               },
+                                heroTag: "age-",
                               child: Icon(Icons.remove),
                                 mini: true,
                               ),
@@ -244,6 +250,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                   age++;
                                 });
                               },
+                                heroTag: "age+",
                               child: Icon(Icons.add),
                                 mini: true,
                               ),
@@ -261,7 +268,15 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             width: double.infinity,
             height: 60.0,
             color: Colors.blue,
-            child: MaterialButton(onPressed: (){},
+            child: MaterialButton(onPressed: (){
+              // weight (kg) / [height (m)]2
+              var result = weight / pow(height /100, 2);
+              print(result);
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context) => ResultBmiCalculator(result: result.round(), age: age, isMale: isMale),
+               ),
+             );
+            },
               child: Text("Calculate",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
